@@ -12,10 +12,10 @@ with open(path_fna, 'r') as file:
     i=0
     a=0
     AA=0
-    old_len_aa= None
+    old_len_bn= None
 
     for line in file:
-        aa_per_line=len(line.strip())
+        bn_per_line=len(line.strip())
         first_character=line.strip()[0]
 
         if(i==0 and first_character == '>'):
@@ -23,12 +23,12 @@ with open(path_fna, 'r') as file:
             a+=1
 
         if(i>0):
-            AA+=aa_per_line
+            AA+=bn_per_line
                     
         
         if(i>1 ):
             
-            if(aa_per_line != old_len_aa and i < num_rows-2 ):
+            if(bn_per_line != old_len_bn and i < num_rows-2 ):
                 print("BAD :: The file HAS NOT the same number of Amino Acids in each line")
                 print(i)
                 break
@@ -37,7 +37,7 @@ with open(path_fna, 'r') as file:
                 print(f"Linea actual: {i} (antepenultima linea)")
                 a+=1
         
-        old_len_aa=aa_per_line
+        old_len_bn=bn_per_line
         i+=1
     
     if(a==2):
