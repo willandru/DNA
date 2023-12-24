@@ -28,6 +28,10 @@ with open(path_fna, 'r') as file:
             for nbase in line:
                 if(nbase != '\n'):
                     nitrogen_bases.append(nbase)
+                    if(nbase not in ('A','C','G','T')):
+                        print(f"BAD :: The file has letters different to A,T,C,G :{nbase} in position: {i}")
+                        a-=1
+                
                     
         
         if(i>1 ):
@@ -45,10 +49,13 @@ with open(path_fna, 'r') as file:
     
     if(a==2):
         print('GOOD :: Valid FASTA file¡¡')
-        print(f"Nitrogen Bases = {NB}")
+    
+    print(f"Nitrogen Bases = {NB}")
+    print('')
 
 #Vamos a iniciar por definir los 64 codones posibles, y vamos a crear un dccionario con estos codones para contar cuantas 
 #veces aparecen en el FASTA     
+    print('Iniciando diccionario de codones ADN:')
 
 codons = ['AAA', 'AAC', 'AAG', 'AAT', 'ACA', 'ACC', 'ACG', 'ACT', 'AGA', 'AGC', 'AGG', 'AGT', 'ATA', 'ATC', 'ATG', 'ATT',
           'CAA', 'CAC', 'CAG', 'CAT', 'CCA', 'CCC', 'CCG', 'CCT', 'CGA', 'CGC', 'CGG', 'CGT', 'CTA', 'CTC', 'CTG', 'CTT',
@@ -64,6 +71,8 @@ for i in range(2,n):
     codon= nitrogen_bases[i-2] + nitrogen_bases[i-1] + nitrogen_bases[i]
     if (codon in codon_dictionary):
         codon_dictionary[codon] += 1
+    else:
+        print(f"ERROR: A 'codon' could not be found in the dictionary: {codon}")
 
 # Print the codon counts
 for codon, count in codon_dictionary.items():
